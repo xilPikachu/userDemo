@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.GoodsDao;
 import com.example.demo.model.PO.Goods;
+import com.example.demo.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,16 @@ import java.util.Date;
 @RestController
 public class goodsController {
     @Autowired
+    private IGoodsService iGoodsService;
     private GoodsDao goodsDao;
 
     @PostMapping("/registergoods")
     public String gooddsVefify(Goods goods){
-        Date date = new Date();
+
+        String addGoods = iGoodsService.addGoods(goods);
+        return addGoods;
+
+        /*Date date = new Date();
         goods.setCreateTime(date);
         goods.setUpdateTime(date);
         goods.setDeleteFlag(0);
@@ -27,7 +33,8 @@ public class goodsController {
 
         goodsDao.addGoods(goods);
         System.out.println("user = [" + goods + "]");
-        return "{\"status\":\"ok\"}";
+        return "{\"status\":\"ok\"}";*/
+
     }
 
     @GetMapping("/selectgoods")

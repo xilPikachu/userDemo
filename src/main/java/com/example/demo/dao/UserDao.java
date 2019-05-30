@@ -9,15 +9,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDao {
-    @Insert("insert into flash(username,password) values(#{username},#{password})")
+    @Insert("insert into user(username,password,createTime,updateTime,createUserId,updateUserId,deleteFlag) values(#{username},#{password},#{createTime},#{updateTime},#{createUserId},#{updateUserId},#{deleteFlag})")
     void addUser(User user);
 
-    @Select("select * from flash where username=#{username}")
+    @Select("select * from user where username=#{username}")
     User getUserByName(String username);
 
-    @Delete("delete from flash where username=#{username}")
+    @Delete("delete from user where username=#{username}")
     void deleteUser(String user);
 
-    @Update("update flash set password=#{password} where username=#{username}")
+    @Update("update user set password=#{password} where username=#{username}")
     void updateUser(User user);
 }

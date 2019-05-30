@@ -108,6 +108,108 @@
                 }
             });
         }
+
+        function addgoods() {
+            var goodsname = $('#goodsNameInput').val();
+            var price = $('#priceInput').val();
+            console.log('goods name is ' + goodsname)
+            console.log('goods price is ' + price)
+
+            $.ajax({
+                type:"POST",  //http交互
+                url:"/registergoods",
+                dataType:"json",
+                data:{
+                    goodsname:goodsname,
+                    price:price,
+                },
+                success:function(data){
+                    if(data.status=="ok"){
+                        alert('ok')
+                    }else{
+                        alert('fail')
+                    }
+                },
+                error: function(jqXHR){
+                    alert("发生错误："+jqXHR.status);
+                }
+            });
+        }
+        function selectgoods() {
+            var gooodsname=$('#goodsNameInputForSelect').val();
+            console.log("username: "+gooodsname);
+
+            $.ajax({
+                type:"GET",  //http交互
+                url:"/selectgoods",
+                dataType:"json",
+                data:{
+                    goodsname:gooodsname,
+                },
+                success:function(data){
+                    if (data){
+                        alert("ok");
+                    }
+                    else {
+                        alert("fail");
+                    }
+                },
+                error: function(jqXHR){
+                    alert("发生错误："+jqXHR.status);
+                }
+            });
+        }
+
+        function deletegoods() {
+            var goodsname=$('#goodsNameInputForDelete').val();
+            console.log("username: "+goodsname);
+
+            $.ajax({
+                type:"DELETE",  //http交互
+                url:"/deletegoods",
+                dataType:"json",
+                data:{
+                    goodsname:goodsname,
+                },
+                success:function(data){
+                    if(data.status=="ok"){
+                        alert('ok')
+                    }else{
+                        alert('fail')
+                    }
+                },
+                error: function(jqXHR){
+                    alert("发生错误："+jqXHR.status);
+                }
+            });
+        }
+
+        function updategoods() {
+            var goodsname = $('#goodsNameInputForUpdate').val();
+            var price = $('#priceInputForUpdate').val();
+            console.log('login name is ' + goodsname)
+            console.log('login password is ' + price)
+
+            $.ajax({
+                type:"POST",  //http交互
+                url:"/updategoods",
+                dataType:"json",
+                data:{
+                    goodsname:goodsname,
+                    price:price,
+                },
+                success:function(data){
+                    if(data.status=="ok"){
+                        alert('ok')
+                    }else{
+                        alert('fail')
+                    }
+                },
+                error: function(jqXHR){
+                    alert("发生错误："+jqXHR.status);
+                }
+            });
+        }
     </script>
 
 
@@ -130,6 +232,22 @@ password:<input id="passwordInput">
 username:<input id="nameInputForUpdate">
 password:<input id="passwordInputForUpdate">
 <button onclick="update()">修改密码</button>
+
+
+<br><br>
+goodsname:<input id="goodsNameInput">
+price:<input id="priceInput">
+<button onclick="addgoods()">添加商品</button>
+<br>
+<input type="text" id="goodsNameInputForSelect">
+<button onclick="selectgoods()">查询商品</button>
+<br>
+<input type="text" id="goodsNameInputForDelete">
+<button onclick="deletegoods()">删除该商品</button>
+<br>
+username:<input id="goodsNameInputForUpdate">
+password:<input id="priceInputForUpdate">
+<button onclick="updategoods()">修改商品价格</button>
 </body>
 </html>
 <!--$.ajax({
